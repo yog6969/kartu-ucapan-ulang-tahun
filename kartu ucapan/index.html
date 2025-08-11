@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Kartu Ucapan Ulang Tahun</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #ffe6f0;
+        color: #333;
+        overflow: hidden;
+    }
+    .page {
+        display: none;
+        height: 100vh;
+        width: 100%;
+        padding: 50px;
+        box-sizing: border-box;
+        text-align: center;
+        transition: all 0.5s ease-in-out;
+    }
+    .active {
+        display: block;
+        animation: fadeIn 1s ease-in-out;
+    }
+    h1 {
+        font-size: 2.5rem;
+        color: #ff4d88;
+    }
+    p {
+        font-size: 1.2rem;
+        line-height: 1.8;
+    }
+    img {
+        max-width: 300px;
+        margin-top: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    button {
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: #ff4d88;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    button:hover {
+        background: #ff1a66;
+    }
+    .music-control {
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        padding: 10px 15px;
+        background: #ff4d88;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .music-control:hover {
+        background: #ff1a66;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<audio id="music" loop muted>
+    <source src="lagu_ulang_tahun.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-control" onclick="toggleMusic()">▶ Nyalakan Musik</button>
+
+<div class="page active" id="page1">
+    <h1>Selamat Ulang Tahun, Dija ❤️</h1>
+    <p>Hari ini adalah hari yang spesial karena hari ini adalah hari kelahiran the most beautifull girl in the world.</p>
+    <img src="foto1.jpg" alt="Foto Kenangan">
+    <button onclick="startMusicAndNext()">Lanjut ❤️</button>
+</div>
+
+<div class="page" id="page2">
+    <h1>Terima Kasih</h1>
+    <p>Terima kasih sudah hadir dalam hidup ogik, membuat ogik tertawa, dan selalu ada di saat suka maupun duka. Maaf kalau selama ini ogik masih banyak kurangnya baik dari segi materi ataupun emosional. Tapi yang pasti ogik sangat bahagia selama bersama Ija. Terima kasih sudah menjadi pasangan yang baik, menjadi partner yang baik serta menjadi guru ogik selama ini.</p>
+    <img src="foto2.jpg" alt="Foto Bersama">
+    <button onclick="nextPage()">Lanjut ❤️</button>
+</div>
+
+<div class="page" id="page3">
+    <h1>Doa untuk Ija 🎂</h1>
+    <p>Semoga Ija diberi kesehatan, Dilancarkan segala urusan dunia akhiratnya, Semoga semua jalan dan pilihan yang ija ambil adalah yang terbaik sama Ija. Ogik juga berdoa semoga bisa langgeng hubungannya sama pasangan baru Ija sampai ke  Sakinah mawaddah warahmah.</p>
+    <img src="foto3.jpg" alt="Moment Spesial">
+    <button onclick="nextPage()">Lanjut ❤️</button>
+</div>
+
+<div class="page" id="page4">
+    <h1>Pesan Dari Ogik</h1>
+    <p>Mungkin ini bisa jadi ulang tahun terakhir Ija yang ogik rayain, ulang tahun terakhir yang bisa ogik kasih Ija kado dan ucapan secara langsung. Tapi, Ogik akan selalu mendoakan Ija kapanpun itu, baik hari spesial ataupun hari biasa. Karena bagi ogik, tidak ada libur untuk tetap menyayangi dan mencintai Ija. Bahkan... Ija bukan lagi milik ogik. Tolong dijaga kesehatannya, jangan suka begadang, makan yang teratur dan jangan males males mandi yaa .</p>
+    <img src="foto4.jpg" alt="Hadiah">
+    <button onclick="nextPage()">Lanjut ❤️</button>
+</div>
+
+<div class="page" id="page5">
+    <h1>I Love You, Today, Tomorrow, Forever 😘</h1>
+    <p>Walaupun tangan ini sudah tak mampu lagi menggenggammu, namun jantung ini tetap ingat bagaimana dia tetap berdetak untukmu. See u on the next time, my love. I'm so gratefull meet someone like u. Love You My season, My Bae.</p>
+    <img src="foto5.jpg" alt="Kita">
+    <button onclick="restart()">back🔄</button>
+</div>
+
+<script>
+    let currentPage = 1;
+    const totalPages = 5;
+    const music = document.getElementById('music');
+    const musicButton = document.querySelector('.music-control');
+    let isPlaying = false;
+
+    function startMusicAndNext() {
+        if (!isPlaying) {
+            music.muted = false;
+            music.play();
+            musicButton.textContent = "⏸ Matikan Musik";
+            isPlaying = true;
+        }
+        nextPage();
+    }
+
+    function nextPage() {
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        currentPage++;
+        if (currentPage <= totalPages) {
+            document.getElementById(`page${currentPage}`).classList.add('active');
+        }
+    }
+
+    function restart() {
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        currentPage = 1;
+        document.getElementById(`page${currentPage}`).classList.add('active');
+    }
+
+    function toggleMusic() {
+        if (isPlaying) {
+            music.pause();
+            musicButton.textContent = "▶ Nyalakan Musik";
+        } else {
+            music.muted = false;
+            music.play();
+            musicButton.textContent = "⏸ Matikan Musik";
+        }
+        isPlaying = !isPlaying;
+    }
+</script>
+
+</body>
+</html>
